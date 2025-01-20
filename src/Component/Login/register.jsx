@@ -31,14 +31,11 @@ const RegisterPage = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
-  const validateEmail = (email) => {
-    return /\S+@\S+\.\S+/.test(email);
-  };
+  const validateEmail = (email) => /\S+@\S+\.\S+/.test(email);
 
-  const validatePhone = (phone) => {
-    // Validasi hanya angka (nomor telepon harus berupa angka)
-    return /^[0-9]+$/.test(phone);
-  };
+  const validatePhone = (phone) => /^[0-9]+$/.test(phone);
+
+  const validateName = (name) => /^[a-zA-Z\s]+$/.test(name);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -46,37 +43,34 @@ const RegisterPage = () => {
     let valid = true;
     let newErrors = {};
 
-    // Name validation
     if (name.trim() === "") {
       newErrors.name = "Name is required";
       valid = false;
+    } else if (!validateName(name)) {
+      newErrors.name = "Name cannot contain numbers or special characters";
+      valid = false;
     }
 
-    // Email validation
     if (!validateEmail(email)) {
       newErrors.email = "Email is invalid";
       valid = false;
     }
 
-    // Phone validation
     if (!validatePhone(phone)) {
       newErrors.phone = "Nomor tidak valid, hanya angka yang diperbolehkan";
       valid = false;
     }
 
-    // Address validation
     if (address.trim() === "") {
       newErrors.address = "Address is required";
       valid = false;
     }
 
-    // Password validation
     if (password.length < 6) {
       newErrors.password = "Password must be at least 6 characters";
       valid = false;
     }
 
-    // Confirm Password validation
     if (password !== confirmPassword) {
       newErrors.confirmPassword = "Passwords do not match";
       valid = false;
@@ -85,11 +79,9 @@ const RegisterPage = () => {
     setErrors(newErrors);
 
     if (valid) {
-      // Simulate registration success
       console.log("Registration Successful");
       setNotification("Registration Successful!");
 
-      // Clear form and errors after successful registration
       setTimeout(() => {
         setNotification("");
         setName("");
@@ -113,7 +105,6 @@ const RegisterPage = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* Notifikasi - Posisi di tengah layar */}
       {notification && (
         <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 p-4 bg-green-100 text-green-700 rounded-lg shadow-lg animate-fade-in flex items-center gap-2">
           <FiCheck className="text-green-600 w-6 h-6" />
@@ -127,7 +118,6 @@ const RegisterPage = () => {
         </h2>
         <form onSubmit={handleSubmit}>
           <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Name Input */}
             <div>
               <label
                 htmlFor="name"
@@ -143,14 +133,15 @@ const RegisterPage = () => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Your Name"
-                  className="w-full py-2 px-3 bg-transparent text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-lg"
+                  className="w-full py-2 px-3 bg-transparent text-gray-500 focus:outline-none focus:ring-0 rounded-lg"
                   required
                 />
               </div>
-              {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
+              {errors.name && (
+                <p className="text-red-500 text-xs mt-1">{errors.name}</p>
+              )}
             </div>
 
-            {/* Email Input */}
             <div>
               <label
                 htmlFor="email"
@@ -166,14 +157,15 @@ const RegisterPage = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Your Email"
-                  className="w-full py-2 px-3 bg-transparent text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-lg"
+                  className="w-full py-2 px-3 bg-transparent text-gray-500 focus:outline-none focus:ring-0 rounded-lg"
                   required
                 />
               </div>
-              {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+              {errors.email && (
+                <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+              )}
             </div>
 
-            {/* Phone Number Input */}
             <div>
               <label
                 htmlFor="phone"
@@ -189,14 +181,15 @@ const RegisterPage = () => {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="Your Phone Number"
-                  className="w-full py-2 px-3 bg-transparent text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-lg"
+                  className="w-full py-2 px-3 bg-transparent text-gray-500 focus:outline-none focus:ring-0 rounded-lg"
                   required
                 />
               </div>
-              {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
+              {errors.phone && (
+                <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
+              )}
             </div>
 
-            {/* Address Input */}
             <div>
               <label
                 htmlFor="address"
@@ -212,14 +205,15 @@ const RegisterPage = () => {
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                   placeholder="Your Address"
-                  className="w-full py-2 px-3 bg-transparent text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-lg"
+                  className="w-full py-2 px-3 bg-transparent text-gray-500 focus:outline-none focus:ring-0 rounded-lg"
                   required
                 />
               </div>
-              {errors.address && <p className="text-red-500 text-xs mt-1">{errors.address}</p>}
+              {errors.address && (
+                <p className="text-red-500 text-xs mt-1">{errors.address}</p>
+              )}
             </div>
 
-            {/* Password Input */}
             <div>
               <label
                 htmlFor="password"
@@ -235,7 +229,7 @@ const RegisterPage = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Your Password"
-                  className="w-full py-2 px-3 bg-transparent text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-lg"
+                  className="w-full py-2 px-3 bg-transparent text-gray-500 focus:outline-none focus:ring-0 rounded-lg"
                   required
                 />
                 <button
@@ -251,10 +245,11 @@ const RegisterPage = () => {
                   )}
                 </button>
               </div>
-              {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
+              {errors.password && (
+                <p className="text-red-500 text-xs mt-1">{errors.password}</p>
+              )}
             </div>
 
-            {/* Confirm Password Input */}
             <div>
               <label
                 htmlFor="confirm-password"
@@ -270,14 +265,14 @@ const RegisterPage = () => {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="Confirm Your Password"
-                  className="w-full py-2 px-3 bg-transparent text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-lg"
+                  className="w-full py-2 px-3 bg-transparent text-gray-500 focus:outline-none focus:ring-0 rounded-lg"
                   required
                 />
                 <button
                   type="button"
                   onClick={toggleConfirmPasswordVisibility}
                   className="focus:outline-none"
-                  aria-label="Toggle confirm password visibility"
+                  aria-label="Toggle password visibility"
                 >
                   {showConfirmPassword ? (
                     <FiEyeOff className="text-gray-500" />
@@ -286,30 +281,19 @@ const RegisterPage = () => {
                   )}
                 </button>
               </div>
-              {errors.confirmPassword && <p className="text-red-500 text-xs mt-1">{errors.confirmPassword}</p>}
+              {errors.confirmPassword && (
+                <p className="text-red-500 text-xs mt-1">{errors.confirmPassword}</p>
+              )}
             </div>
           </div>
 
-          {/* Already have an account? */}
-          <div className="text-center mt-6">
-            <p className="text-sm text-gray-500">
-              Already have an account?{" "}
-              <a href="/login" className="text-blue-500 hover:underline">
-                Sign In
-              </a>
-            </p>
-          </div>
-
-          {/* Submit Button */}
           <button
             type="submit"
-            className="w-full mt-6 py-3 bg-[#4E47FF] text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300"
+            className="w-full py-3 mt-6 bg-blue-500 text-white text-lg rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
           >
             Sign Up
           </button>
         </form>
-
-        
       </div>
     </div>
   );

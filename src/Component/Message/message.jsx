@@ -103,7 +103,7 @@ const MessagePage = () => {
                 placeholder="Your Name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full py-2 px-3 bg-transparent text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-lg"
+                className="w-full py-2 px-3 bg-transparent text-gray-500 rounded-lg focus:outline-none focus:ring-0"
                 required
               />
             </div>
@@ -128,7 +128,7 @@ const MessagePage = () => {
                 placeholder="Your Email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full py-2 px-3 bg-transparent text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-lg"
+                className="w-full py-2 px-3 bg-transparent text-gray-500 rounded-lg focus:outline-none focus:ring-0"
                 required
               />
             </div>
@@ -152,7 +152,7 @@ const MessagePage = () => {
                 placeholder="Your Message"
                 value={formData.message}
                 onChange={handleChange}
-                className="w-full py-2 px-3 bg-transparent text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-lg resize-none"
+                className="w-full py-2 px-3 bg-transparent text-gray-500 rounded-lg focus:outline-none focus:ring-0 resize-none"
                 rows="5"
                 required
               />

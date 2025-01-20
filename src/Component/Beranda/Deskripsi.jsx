@@ -32,7 +32,7 @@ const LandingPage = () => {
       description:
         "Discover the latest trends in digital solutions that are revolutionizing industries worldwide. Stay ahead of the curve and learn about cutting-edge technologies.",
       image: blogImg1,
-      link: "#",
+      link: "https://platform1.com/new-trends-digital-solutions",
     },
     {
       title: "How AI is Shaping the Future of Technology",
@@ -40,7 +40,7 @@ const LandingPage = () => {
       description:
         "AI is not just a buzzword—it's the driving force behind many breakthroughs in technology. In this article, we explore how AI is changing the game for businesses across sectors.",
       image: blogImg2,
-      link: "#",
+      link: "https://platform2.com/ai-future-of-technology",
     },
     {
       title: "5 Key Tips for Building a User-Centered Website",
@@ -48,7 +48,7 @@ const LandingPage = () => {
       description:
         "User-centered design is more important than ever in creating effective websites. Learn the key tips to build websites that prioritize user experience.",
       image: blogImg3,
-      link: "#",
+      link: "https://platform3.com/user-centered-website-tips",
     },
   ];
 
@@ -82,30 +82,28 @@ const LandingPage = () => {
           <div
             className="flex transition-transform duration-300"
             style={{
-              transform: `translateX(-${
-                (currentIndex - 1) * 33.33
-              }%)`, // Shift based on the current index
+              transform: `translateX(-${(currentIndex - 1) * 33.33}%)`,
             }}
           >
             {portfolioItems.map((image, index) => (
               <div
                 key={index}
-                onClick={() => handleImageClick(index)} // Focus on clicked image
+                onClick={() => handleImageClick(index)}
                 className={`cursor-pointer transition-transform duration-300 ${
                   currentIndex === index
-                    ? "scale-110" // Slight zoom effect
-                    : "scale-90 opacity-75" // Less opacity for non-active images
+                    ? "scale-110"
+                    : "scale-90 opacity-75"
                 } bg-white border rounded-lg shadow-lg overflow-hidden mx-2`}
                 style={{
                   flex: "0 0 33.33%",
-                  height: "300px", // Set height for each image
-                  transition: "transform 0.3s ease", // Smooth zoom transition
+                  height: "300px",
+                  transition: "transform 0.3s ease",
                 }}
               >
                 <img
                   src={image}
                   alt={`Portfolio ${index + 1}`}
-                  className="w-full h-full object-contain" // Ensures image stays fully visible
+                  className="w-full h-full object-contain"
                 />
               </div>
             ))}
@@ -147,6 +145,8 @@ const LandingPage = () => {
               <a
                 href={post.link}
                 className="text-[#0D255E] font-bold mt-4 inline-block"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 Read More
               </a>
