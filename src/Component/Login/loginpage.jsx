@@ -74,14 +74,6 @@ const LoginPage = () => {
         </div>
       )}
 
-      {/* Notifikasi - Posisi di sudut kanan atas */}
-      {/* {notification && (
-        <div className="fixed top-4 right-4 z-50 p-4 bg-green-100 text-green-700 rounded-lg shadow-lg animate-fade-in flex items-center gap-2">
-          <FiCheck className="text-green-600 w-6 h-6" />
-          {notification}
-        </div>
-      )} */}
-
       <div className="p-8 w-full max-w-md mt-12">
         <h2 className="mt-8 text-3xl font-bold text-center text-gray-800 mb-5">
           Let’s Sign In
@@ -103,7 +95,7 @@ const LoginPage = () => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Your Name"
-                className="w-full py-2 px-3 bg-transparent text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-lg"
+                className="w-full py-2 px-3 bg-transparent text-gray-600 focus:outline-none focus:ring-0 focus:border-gray-300 rounded-lg"
                 required
               />
             </div>
@@ -126,7 +118,7 @@ const LoginPage = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Your Email"
-                className="w-full py-2 px-3 bg-transparent text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-lg"
+                className="w-full py-2 px-3 bg-transparent text-gray-600 focus:outline-none focus:ring-0 focus:border-gray-300 rounded-lg"
                 required
               />
             </div>
@@ -149,7 +141,7 @@ const LoginPage = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Your Password"
-                className="w-full py-2 px-3 bg-transparent text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-lg"
+                className="w-full py-2 px-3 bg-transparent text-gray-600 focus:outline-none focus:ring-0 focus:border-gray-300 rounded-lg"
                 required
               />
               <button
@@ -186,8 +178,6 @@ const LoginPage = () => {
             Sign In
           </button>
         </form>
-
-        
       </div>
     </div>
   );

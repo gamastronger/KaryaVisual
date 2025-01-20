@@ -56,10 +56,10 @@ const LandingPage = () => {
     <div className="bg-[#F9FBFF] text-black">
       {/* Header Section */}
       <div className="container mx-auto py-16 px-6 lg:px-16 text-left">
-        <h1 className="lg:text-6xl font-bold text-black leading-tight mb-6">
+        <h1 className="lg:text-5xl font-bold text-black leading-tight mb-6">
           Why AKAZA Is The Best Choice?
         </h1>
-        <p className="text-lg lg:text-3xl text-gray-600 mb-8 max-w-4xl text-justify">
+        <p className="text-lg lg:text-2xl text-gray-600 mb-8 max-w-4xl text-justify">
           At Akaza Studio, we combine innovation, expertise, and a client-first
           approach to deliver tailored digital solutions. From user-centered
           designs to cutting-edge technology, we ensure your projects are not
@@ -156,8 +156,8 @@ const LandingPage = () => {
       </div>
 
       {/* Stats Section */}
-      <div className="bg-[#E5F6FF] py-16">
-        <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-center px-6 lg:px-16">
+      <div className="bg-[white] py-16">
+        <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center px-6 lg:px-16">
           {[{ number: "40+", label: "Clients" }, { number: "100+", label: "Rating Apps" }, { number: "4.7", label: "Rating Average" }, { number: "1.2", label: "Apps Downloaded" }].map(
             (stat, index) => (
               <div key={index} className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">

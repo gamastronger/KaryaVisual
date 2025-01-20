@@ -105,7 +105,7 @@ const Welcome = () => {
           ></p>
           <div className="flex justify-center gap-4">
             <a
-              href="https://wa.me/6283112080715"
+              href="/message"
               target="_blank"
               rel="noopener noreferrer"
               className="font-sans bg-black text-white px-6 py-3 font-bold rounded-lg shadow-lg hover:scale-105 transition-transform"
