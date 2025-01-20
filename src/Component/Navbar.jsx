@@ -9,10 +9,29 @@ const Navbar = () => {
 
   return (
     <div className="relative">
+      {/* Logo */}
+      <div className="absolute top-5 left-4 text-[#14203D] text-xl font-bold z-50">
+        AKAZA
+      </div>
+
+      {/* Sign In and Sign Up */}
+      <div className="absolute top-5 right-4 flex items-center gap-4 z-50">
+        <a
+          href="/login"
+          className="hover:text-[#6eacda] transition duration-300 font-semibold"
+        >
+          Sign In
+        </a>
+        <a
+          href="/register"
+          className="bg-[#6eacda] text-white py-2 px-4 rounded-full transition duration-300 font-semibold"
+        >
+          Sign Up
+        </a>
+      </div>
+
       {/* Rounded Navbar */}
-      <div
-        className={`absolute top-5 left-1/2 transform -translate-x-1/2 bg-white py-3 px-20 flex items-center justify-between rounded-full shadow-lg text-[#14203D] w-[100%] md:w-[70%] lg:w-[55%] z-50`}
-      >
+      <div className="absolute top-5 left-1/2 transform -translate-x-1/2 bg-white py-3 px-20 flex items-center justify-between rounded-full shadow-lg text-[#14203D] w-[100%] md:w-[70%] lg:w-[55%] z-40">
         {/* Links for Desktop */}
         <div className="text-[#424242] hidden md:flex items-center justify-center gap-16 text-sm font-sans">
           <a
@@ -45,21 +64,10 @@ const Navbar = () => {
           >
             Resource
           </a>
-          <a
-            href="/login"
-            className="hover:text-[#6eacda] transition duration-300 font-semibold"
-          >
-            login
-          </a>
-          
-            
         </div>
 
         {/* Hamburger Icon for Mobile */}
-        <button
-          className="block md:hidden text-[#14203D]"
-          onClick={handleSidebar}
-        >
+        <button className="block md:hidden text-[#14203D]" onClick={handleSidebar}>
           <svg
             className="w-8 h-8"
             fill="none"
@@ -83,7 +91,10 @@ const Navbar = () => {
           className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-end"
           onClick={handleSidebar}
         >
-          <div className="absolute top-0 right-0 w-64 bg-white shadow-lg p-6 rounded-l-xl h-full flex flex-col items-center">
+          <div
+            className="absolute top-0 right-0 w-64 bg-white shadow-lg p-6 rounded-l-xl h-full flex flex-col items-center"
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
               className="self-end text-[#14203D] mb-4"
               onClick={handleSidebar}

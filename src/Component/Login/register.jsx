@@ -7,12 +7,21 @@ import {
   FiUser,
   FiPhone,
   FiMapPin,
+  FiCheck,
 } from "react-icons/fi";
 import background from "../../assets/background.jpg";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errors, setErrors] = useState({});
+  const [notification, setNotification] = useState("");
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -20,6 +29,78 @@ const LoginPage = () => {
 
   const toggleConfirmPasswordVisibility = () => {
     setShowConfirmPassword(!showConfirmPassword);
+  };
+
+  const validateEmail = (email) => {
+    return /\S+@\S+\.\S+/.test(email);
+  };
+
+  const validatePhone = (phone) => {
+    // Validasi hanya angka (nomor telepon harus berupa angka)
+    return /^[0-9]+$/.test(phone);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    let valid = true;
+    let newErrors = {};
+
+    // Name validation
+    if (name.trim() === "") {
+      newErrors.name = "Name is required";
+      valid = false;
+    }
+
+    // Email validation
+    if (!validateEmail(email)) {
+      newErrors.email = "Email is invalid";
+      valid = false;
+    }
+
+    // Phone validation
+    if (!validatePhone(phone)) {
+      newErrors.phone = "Nomor tidak valid, hanya angka yang diperbolehkan";
+      valid = false;
+    }
+
+    // Address validation
+    if (address.trim() === "") {
+      newErrors.address = "Address is required";
+      valid = false;
+    }
+
+    // Password validation
+    if (password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters";
+      valid = false;
+    }
+
+    // Confirm Password validation
+    if (password !== confirmPassword) {
+      newErrors.confirmPassword = "Passwords do not match";
+      valid = false;
+    }
+
+    setErrors(newErrors);
+
+    if (valid) {
+      // Simulate registration success
+      console.log("Registration Successful");
+      setNotification("Registration Successful!");
+
+      // Clear form and errors after successful registration
+      setTimeout(() => {
+        setNotification("");
+        setName("");
+        setEmail("");
+        setPhone("");
+        setAddress("");
+        setPassword("");
+        setConfirmPassword("");
+        setErrors({});
+      }, 3000);
+    }
   };
 
   return (
@@ -32,16 +113,20 @@ const LoginPage = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="p-8 w-full max-w-3xl mt-12">
+      {/* Notifikasi - Posisi di tengah layar */}
+      {notification && (
+        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 p-4 bg-green-100 text-green-700 rounded-lg shadow-lg animate-fade-in flex items-center gap-2">
+          <FiCheck className="text-green-600 w-6 h-6" />
+          {notification}
+        </div>
+      )}
+
+      <div className="mt-8 p-8 w-full max-w-3xl mt-12">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6 mt-10">
           Let’s Sign Up
         </h2>
-        <p className="text-center text-gray-500 mb-8">
-          Enter your details to continue
-        </p>
-
-        <form>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <form onSubmit={handleSubmit}>
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Name Input */}
             <div>
               <label
@@ -55,11 +140,14 @@ const LoginPage = () => {
                 <input
                   type="text"
                   id="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   placeholder="Your Name"
                   className="w-full py-2 px-3 bg-transparent text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-lg"
                   required
                 />
               </div>
+              {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
             </div>
 
             {/* Email Input */}
@@ -75,11 +163,14 @@ const LoginPage = () => {
                 <input
                   type="email"
                   id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="Your Email"
                   className="w-full py-2 px-3 bg-transparent text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-lg"
                   required
                 />
               </div>
+              {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
             </div>
 
             {/* Phone Number Input */}
@@ -95,11 +186,14 @@ const LoginPage = () => {
                 <input
                   type="tel"
                   id="phone"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
                   placeholder="Your Phone Number"
                   className="w-full py-2 px-3 bg-transparent text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-lg"
                   required
                 />
               </div>
+              {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
             </div>
 
             {/* Address Input */}
@@ -115,11 +209,14 @@ const LoginPage = () => {
                 <input
                   type="text"
                   id="address"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
                   placeholder="Your Address"
                   className="w-full py-2 px-3 bg-transparent text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-lg"
                   required
                 />
               </div>
+              {errors.address && <p className="text-red-500 text-xs mt-1">{errors.address}</p>}
             </div>
 
             {/* Password Input */}
@@ -135,6 +232,8 @@ const LoginPage = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="Your Password"
                   className="w-full py-2 px-3 bg-transparent text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-lg"
                   required
@@ -152,6 +251,7 @@ const LoginPage = () => {
                   )}
                 </button>
               </div>
+              {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
             </div>
 
             {/* Confirm Password Input */}
@@ -167,6 +267,8 @@ const LoginPage = () => {
                 <input
                   type={showConfirmPassword ? "text" : "password"}
                   id="confirm-password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="Confirm Your Password"
                   className="w-full py-2 px-3 bg-transparent text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-lg"
                   required
@@ -184,10 +286,11 @@ const LoginPage = () => {
                   )}
                 </button>
               </div>
+              {errors.confirmPassword && <p className="text-red-500 text-xs mt-1">{errors.confirmPassword}</p>}
             </div>
           </div>
 
-          {/* Register and Forgot Password Links */}
+          {/* Already have an account? */}
           <div className="text-center mt-6">
             <p className="text-sm text-gray-500">
               Already have an account?{" "}
@@ -205,9 +308,11 @@ const LoginPage = () => {
             Sign Up
           </button>
         </form>
+
+        
       </div>
     </div>
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
